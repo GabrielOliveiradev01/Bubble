@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conteúdo do Iframe</title>
+  <style>
+    /* Estilo do texto dentro do iframe */
+    .texto {
+      font-size: 24px;
+      font-weight: bold;
+      display: inline-block;
+      letter-spacing: 2px; /* Ajusta o espaçamento entre as letras */
+    }
+
+    .texto span {
+      display: inline-block;
+      color: #3498db; /* Cor inicial */
+      transition: color 0.3s ease; /* Transição suave */
+    }
+
+    .texto span:hover {
+      color: #e74c3c; /* Nova cor ao passar o mouse */
+    }
+  </style>
+</head>
+<body>
+  <p class="texto" id="texto">Passe o mouse sobre este texto para mudar a cor letra por letra!</p>
+
+  <script>
+    // Função para envolver cada letra com uma tag <span>
+    function wrapLetters() {
+      const textElement = document.getElementById('texto');
+      const text = textElement.innerText;
+      textElement.innerHTML = ''; // Limpa o conteúdo original
+      for (let char of text) {
+        const span = document.createElement('span');
+        span.innerText = char;
+        textElement.appendChild(span);
+      }
+    }
+
+    // Chama a função ao carregar a página
+    window.onload = wrapLetters;
+  </script>
+</body>
+</html>
