@@ -1,0 +1,57 @@
+function(instance, properties) {
+  (function() {
+    /**
+     * Função para adicionar animação de hover em texto, letra por letra.
+     * @param {string} elementId - O ID do elemento que contém o texto.
+     * @param {string} animationDuration - Duração da animação (ex: '0.5s').
+     * @param {string} letterSpacing - Espaçamento entre as letras (ex: '2px').
+     */
+    window.addHoverEffect = function(elementId, animationDuration = "0.5s", letterSpacing = "2px") {
+      const textElement = document.getElementById(elementId);
+
+      if (!textElement) {
+        console.error(`Elemento com ID "${elementId}" não encontrado.`);
+        return;
+      }
+
+      // Obter o texto original e limpar o elemento
+      const text = textElement.innerText;
+      textElement.innerHTML = '';
+
+      // Criar spans para cada letra
+      for (let char of text) {
+        const span = document.createElement('span');
+        span.innerText = char === ' ' ? '\u00A0' : char; // Preservar espaços
+        textElement.appendChild(span);
+      }
+
+      // Adicionar estilo ao container e spans
+      textElement.style.display = 'inline-block';
+      textElement.style.letterSpacing = letterSpacing;
+
+      const spans = textElement.querySelectorAll('span');
+      spans.forEach(span => {
+        span.style.display = 'inline-block';
+        span.style.transition = `transform ${animationDuration} ease`;
+        span.style.cursor = 'pointer';
+
+        // Adicionar evento de hover para animar
+        span.addEventListener('mouseover', () => {
+          span.style.transform = 'translateY(-10px) rotate(10deg)';
+        });
+
+        span.addEventListener('mouseout', () => {
+          span.style.transform = 'translateY(0) rotate(0)';
+        });
+      });
+    };
+  })();
+
+  // Chamar a função para o elemento com ID
+  const elementId = `element_${properties.element_id}`;
+  const duration = properties.animation_duration || "0.5s";
+  const spacing = properties.letter_spacing || "2px";
+
+  // Ativar o efeito de hover
+  addHoverEffect(elementId, duration, spacing);
+}
