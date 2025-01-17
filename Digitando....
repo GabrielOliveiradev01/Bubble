@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Efeito de Digitação</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f8ff;
+    }
+
+    #typing-container {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      border: 2px solid #333;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="typing-container"></div>
+
+  <script>
+    const typingContainer = document.getElementById('typing-container');
+    const textToType = "Este é um exemplo de efeito de digitação. O texto é exibido lentamente, simulando uma escrita automática!";
+    const typingSpeed = 100; // Velocidade da digitação (em milissegundos)
+
+    let index = 0;
+
+    function typeText() {
+      if (index < textToType.length) {
+        typingContainer.textContent += textToType.charAt(index);
+        index++;
+        setTimeout(typeText, typingSpeed);
+      }
+    }
+
+    typeText(); // Inicia a digitação
+  </script>
+</body>
+</html>
